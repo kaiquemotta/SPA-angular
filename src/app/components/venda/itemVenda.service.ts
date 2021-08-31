@@ -12,7 +12,7 @@ import {ProdutoModel} from "../produto/produto.model";
 })
 export class ItemVendaService {
 
-    baseUrl = "http://localhost:8080/itemVenda"
+    baseUrl = "https://pdv-back.herokuapp.com/itemVenda"
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {

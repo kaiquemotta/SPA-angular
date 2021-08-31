@@ -10,7 +10,7 @@ import {catchError, map} from "rxjs/operators";
 })
 export class VendaService {
 
-    baseUrl = "http://localhost:8080/venda"
+    baseUrl = "https://pdv-back.herokuapp.com/venda"
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {

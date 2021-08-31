@@ -11,7 +11,7 @@ import {FormBuilder} from "@angular/forms";
 export class RelatorioCaixaComponent {
 
 
-    pdfSrc = "http://localhost:8080/venda/vendas/export/pdf";
+    pdfSrc = "https://pdv-back.herokuapp.com/venda/vendas/export/pdf";
 
     constructor(private vendaService: VendaService,
                 private router: Router,
