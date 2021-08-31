@@ -74,7 +74,8 @@ export class PagamentoComponent implements OnInit {
 
         this.vendaFindById();
         this.findAllPagamentos();
-        this.findAllModosPagamentos()
+        this.findAllModosPagamentos();
+        this.somaRestante();
 
     }
 
@@ -156,7 +157,26 @@ export class PagamentoComponent implements OnInit {
             this.pagamento.controls.porcentagemDesconto.setValue(0);
         }
     }
+    private calculaRestante() {
+        if (this.pagamento.controls.valorPagamento.value <= this.restante) {
+            this.restante -= this.pagamento.controls.valorPagamento.value;
+        } else if (this.pagamento.controls.valorPagamento.value >= this.restante && this.modoPagamento.aVista) {
+            this.restante = 0;
+        }
+    }
 
+    finalizaVenda() {
+        if (this.restante == 0) {
+            this.vendaService.finalizaVenda(this.data.id).subscribe(venda => {
+                this.vendaService.mostrarMessagem('Venda criada com sucesso!', false)
+                this.dialogRef.close();
+                this.router.navigate(["venda"]);
+            })
+        }
+        else{
+            this.vendaService.mostrarMessagem('Erro, pagamento não recebido', true)
+        }
+    }
 
     somaRestante() {
         var soma = 0;
@@ -190,21 +210,5 @@ export class PagamentoComponent implements OnInit {
         // this.checkoutForm.reset();
     }
 
-    private calculaRestante() {
-        if (this.pagamento.controls.valorPagamento.value <= this.restante) {
-            this.restante -= this.pagamento.controls.valorPagamento.value;
-        } else if (this.pagamento.controls.valorPagamento.value >= this.restante && this.modoPagamento.aVista) {
-            this.restante = 0;
-        }
-    }
 
-    finalizaVenda() {
-        if (this.restante == 0) {
-            this.vendaService.finalizaVenda(this.data.id).subscribe(venda => {
-                this.vendaService.mostrarMessagem('Venda criada com sucesso!', false)
-                this.dialogRef.close();
-                this.router.navigate(["imprime-comprovante"]);
-            })
-        }
-    }
 }

@@ -17,7 +17,6 @@ import {VendaReadComponent} from "./components/venda/venda-read/venda-read.compo
 import {ModoPagamentoComponent} from "./views/modo-pagamento/modo-pagamento.component";
 import {ModoPagamentoCreateComponent} from "./components/modo-pagamento/modo-pagamento-create/modo-pagamento-create.component";
 import {ModoPagamentoUpdateComponent} from "./components/modo-pagamento/modo-pagamento-update/modo-pagamento-update.component";
-import {RelatoriosComponent} from "./reports/relatorios/relatorios.component";
 import {RelatorioVendaComponent} from "./views/relatorio-venda/relatorio-venda.component";
 import {CriaCaixaComponent} from "./views/caixa/cria-caixa/cria-caixa.component";
 import {FechamentoCaixaComponent} from "./views/caixa/fechamento-caixa/fechamento-caixa.component";
