@@ -11,7 +11,7 @@ import {catchError, map} from "rxjs/operators";
 })
 export class CategoriaService {
 
-    baseUrl = "http://localhost:8080/categorias"
+    baseUrl = "https://pdv-back.herokuapp.com/categorias"
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {
