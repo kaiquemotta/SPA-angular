@@ -73,9 +73,7 @@ export class PagamentoComponent implements OnInit {
         })
 
         this.vendaFindById();
-        this.findAllPagamentos();
-        this.findAllModosPagamentos();
-        this.somaRestante();
+
 
     }
 
@@ -96,6 +94,9 @@ export class PagamentoComponent implements OnInit {
     private vendaFindById() {
         this.vendaService.findById(this.data.id).subscribe(venda => {
             this.venda = venda;
+            this.somaRestante();
+            this.findAllPagamentos();
+            this.findAllModosPagamentos();
         })
     }
 
