@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CaixaService} from "../caixa.service";
-import {Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
-import {Observable} from "rxjs";
-import {ProdutoModel} from "../../produto/produto.model";
-import {CaixaModel} from "../caixa.model";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CaixaService } from "../caixa.service";
+import { Router } from "@angular/router";
+import { MatTableDataSource } from "@angular/material/table";
+import { Observable } from "rxjs";
+import { ProdutoModel } from "../../produto/produto.model";
+import { CaixaModel } from "../caixa.model";
 
 @Component({
     selector: 'app-fecha-caixa',
@@ -16,26 +16,52 @@ export class FechaCaixaComponent implements OnInit {
 
     caixa: FormGroup
     caixaF: CaixaModel;
+    disable: boolean = true ;
 
     constructor(private caixaService: CaixaService,
-                private router: Router,
-                private fb: FormBuilder) {
+        private router: Router,
+        private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
-
         this.caixa = this.fb.group({
-            id: [{value: ''}],
-            nome: [{value: '', disabled: true}],
-            data: [{value: '', disabled: true}],
-            valorInicial: [{value: '', disabled: true}],
-            valorTotalCaixa: [{value: '', disabled: true}],
-            valorTotalAvista: [{value: '', disabled: true}],
-            valorFechamentoAvista: [{value:'', disabled: false}],
-            valorTotalCartao: [{value: '', disabled: true}],
-            valorTotalCartaoFechamento: [{value: '',disabled: false}],
-            diferencaCartao: [{value: '',disabled: true}],
-            diferencaAvista: [{value: '',disabled: true}]
+            id: [{ value: '' }],
+            nome: [{ value: '', disabled: true }],
+            idUsuario: [{ value: '', disabled: true }],
+
+            valorAbertura: [{ value: '', disabled: true }],
+            valorFechamento: [{ value: '', disabled: true }],
+
+            valorPagamentoDinheiro: [{ value: 0, disabled: true }],
+            valorPagamentoPix: [{ value: '', disabled: true }],
+            valorPagamentoCartaoCredito: [{ value: '', disabled: true }],
+            valorPagamentoCartaoDebito: [{ value: '', disabled: true }],
+
+            valorPagamentoConsignado: [{ value: '', disabled: true }],
+
+
+
+            valorFechamentoDinheiro: [{ value: '', disabled: false }],
+            valorFechamentoPix: [{ value: '', disabled: false }],
+            valorFechamentoCartaoCredito: [{ value: '', disabled: false }],
+            valorFechamentoCartaoDebito: [{ value: '', disabled: false }],
+
+            valorFechamentoConsignado: [{ value: '', disabled: false }],
+
+            diferencaDinheiro: [{ value: '', disabled: true }],
+            diferencaPix: [{ value: '', disabled: true }],
+            diferencaCartaoCredito: [{ value: '', disabled: true }],
+            diferencaCartaoDebito: [{ value: '', disabled: true }],
+
+            diferencaConsignado: [{ value: '', disabled: true }],
+
+
+
+            dataAbertura: [{ value: '', disabled: true }],
+            dataFechamento: [{ value: '', disabled: true }],
+            diferencaAvista: [{ value: '', disabled: true }],
+            aberto: [{ value: '', disabled: true }]
+
         })
 
         this.getCaixaFechar();
@@ -52,29 +78,68 @@ export class FechaCaixaComponent implements OnInit {
             return;
         }
 
-        this.caixaF.diferencaAvista = this.caixa.controls.diferencaAvista.value.replace('R$ ', '');
-        this.caixaF.diferencaCartao = this.caixa.controls.diferencaCartao.value.replace('R$ ', '');
+        //this.caixaF.diferencaAvista = this.caixa.controls.diferencaAvista.value.replace('R$ ', '');
+        //this.caixaF.diferencaCartao = this.caixa.controls.diferencaCartao.value.replace('R$ ', '');
         this.caixaF.nome = this.caixa.controls.nome.value;
 
         //subscribe depois que ele recebe o retorno do back-end ele chama essa arrow function
         this.caixaService.update(this.caixaF).subscribe(() => {
-            this.caixaService.mostrarMessagem('Caixa fechado com sucesso!', false)
-            this.router.navigate(["/caixa"]);
+            this.caixaService.findById(this.caixaF.id).subscribe((caixa) => {
+                this.caixaF = caixa;
 
+                this.caixa.controls.dataFechamento.setValue(this.caixaF.dataFechamento)
+                this.caixa.controls.aberto.setValue(this.caixaF.aberto === true ? 'ABERTO' : 'FECHADO')
+
+                this.caixaService.mostrarMessagem('Caixa fechado com sucesso!', false)
+            });
+
+            //this.router.navigate(["/fecha-caixa"]);
         })
 
     }
 
     getCaixaFechar() {
         this.caixaService.getCaixaFechar().subscribe(caixa => {
-            this.caixaF = caixa;
-            this.caixa.controls.id.setValue(this.caixaF.id)
-            this.caixa.controls.nome.setValue(this.caixaF.nome)
-            this.caixa.controls.valorInicial.setValue(this.caixaF.valorAbertura)
-            this.caixa.controls.valorTotalCaixa.setValue(this.caixaF.valorFechamento)
-            this.caixa.controls.data.setValue(this.caixaF.dataAbertura)
-            this.caixa.controls.valorTotalAvista.setValue(this.caixaF.valorFechamentoAvista)
-            this.caixa.controls.valorTotalCartao.setValue(this.caixaF.valorFechamentoCartao)
+            if (caixa != null) {
+                this.caixaF = caixa;
+                this.caixa.controls.id.setValue(this.caixaF.id)
+                this.caixa.controls.nome.setValue(this.caixaF.nome)
+                this.caixa.controls.idUsuario.setValue(this.caixaF.idUsuario)
+                this.caixa.controls.valorAbertura.setValue(this.caixaF.valorAbertura)
+                this.caixa.controls.valorFechamento.setValue(this.caixaF.valorFechamento)
+
+                this.caixa.controls.valorFechamentoDinheiro.setValue(this.caixaF.valorFechamentoDinheiro)
+                this.caixa.controls.valorFechamentoPix.setValue(this.caixaF.valorFechamentoPix)
+                this.caixa.controls.valorFechamentoCartaoCredito.setValue(this.caixaF.valorFechamentoCartaoCredito)
+                this.caixa.controls.valorFechamentoCartaoDebito.setValue(this.caixaF.valorFechamentoCartaoDebito)
+
+                this.caixa.controls.valorFechamentoConsignado.setValue(this.caixaF.valorFechamentoConsignado)
+
+
+                this.caixa.controls.diferencaDinheiro.setValue(this.caixaF.diferencaDinheiro)
+                this.caixa.controls.diferencaPix.setValue(this.caixaF.diferencaPix)
+                this.caixa.controls.diferencaCartaoCredito.setValue(this.caixaF.diferencaCartaoCredito)
+                this.caixa.controls.diferencaCartaoDebito.setValue(this.caixaF.diferencaCartaoDebito)
+
+                this.caixa.controls.diferencaConsignado.setValue(this.caixaF.diferencaConsignado)
+
+
+                this.caixa.controls.valorPagamentoDinheiro.setValue(this.caixaF.valorPagamentoDinheiro)
+                this.caixa.controls.valorPagamentoPix.setValue(this.caixaF.valorPagamentoPix)
+                this.caixa.controls.valorPagamentoCartaoCredito.setValue(this.caixaF.valorPagamentoCartaoCredito)
+                this.caixa.controls.valorPagamentoCartaoDebito.setValue(this.caixaF.valorPagamentoCartaoDebito)
+
+                this.caixa.controls.valorPagamentoConsignado.setValue(this.caixaF.valorPagamentoConsignado)
+
+                this.caixa.controls.dataAbertura.setValue(this.caixaF.dataAbertura)
+                this.caixa.controls.dataFechamento.setValue(this.caixaF.dataFechamento)
+                this.caixa.controls.aberto.setValue(this.caixaF.aberto === true ?'ABERTO': 'FECHADO')
+                this.verificaDiferenca();
+            }else{
+                this.disable = false;
+                this.caixa.controls.aberto.setValue('INDEFINIDO');
+            }
+
         })
     }
     cancelar(): void {
@@ -82,9 +147,10 @@ export class FechaCaixaComponent implements OnInit {
     }
 
     verificaDiferenca() {
-        this.caixa.controls.diferencaAvista.setValue('R$ ' + (this.caixa.controls.valorTotalAvista.value - this.caixa.controls.valorFechamentoAvista.value));
-        this.caixa.controls.diferencaCartao.setValue('R$ ' + (this.caixa.controls.valorTotalCartao.value - this.caixa.controls.valorTotalCartaoFechamento.value));
+        this.caixa.controls.diferencaDinheiro.setValue(this.caixa.controls.valorPagamentoDinheiro.value - this.caixa.controls.valorFechamentoDinheiro.value);
+        this.caixa.controls.diferencaPix.setValue(this.caixa.controls.valorPagamentoPix.value - this.caixa.controls.valorFechamentoPix.value);
+        this.caixa.controls.diferencaCartaoCredito.setValue(this.caixa.controls.valorPagamentoCartaoCredito.value - this.caixa.controls.valorFechamentoCartaoCredito.value);
+        this.caixa.controls.diferencaCartaoDebito.setValue(this.caixa.controls.valorPagamentoCartaoDebito.value - this.caixa.controls.valorFechamentoCartaoDebito.value);
 
-        console.log(this.caixa.controls.diferencaAvista.value)
     }
 }

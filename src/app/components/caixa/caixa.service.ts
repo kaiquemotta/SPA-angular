@@ -40,7 +40,7 @@ export class CaixaService {
         )
     }
 
-    findById(id: string): Observable<CaixaModel>{
+    findById(id: number): Observable<CaixaModel>{
         const url =`${this.baseUrl}/${id}`
         return this.http.get<CaixaModel>(url).pipe(
             map(obj => obj),

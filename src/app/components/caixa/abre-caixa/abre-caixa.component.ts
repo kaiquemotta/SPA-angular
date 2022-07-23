@@ -40,7 +40,7 @@ export class AbreCaixaComponent implements OnInit {
     //subscribe depois que ele recebe o retorno do back-end ele chama essa arrow function
     this.caixaService.insert(this.caixa.value).subscribe(() => {
       this.caixaService.mostrarMessagem('Caixa criada com sucesso!', false)
-      this.router.navigate(["/caixa"]);
+      this.router.navigate(["/"]);
 
     })
 

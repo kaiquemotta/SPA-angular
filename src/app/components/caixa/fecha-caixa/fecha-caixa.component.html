@@ -10,81 +10,196 @@
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
                 <mat-label>Valor Inical</mat-label>
-                <input matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorInicial"
-                       formControlName="valorInicial"
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorAbertura"
+                       formControlName="valorAbertura"
                        type="text" min="0">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Valor Total Caixa</mat-label>
-                <input matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorTotalCaixa"
-                       formControlName="valorTotalCaixa"
+                <input matInput currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"placeholder="Ex: R$ 10.0" name="valorFechamento"
+                       formControlName="valorFechamento"
                        type="text" min="0">
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Data</mat-label>
-                <input  matInput prefix=" " placeholder="Ex: R$ 10.0" name="data"
-                       formControlName="data"
+                <mat-label>Data Abertura</mat-label>
+                <input  matInput prefix=" " placeholder="Ex: R$ 10.0" name="dataAbertura"
+                       formControlName="dataAbertura"
                        type="datetime-local">
             </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Data Fechamento</mat-label>
+                <input  matInput prefix=" " placeholder="Ex: R$ 10.0" name="dataFechamento"
+                       formControlName="dataFechamento"
+                       type="datetime-local">
+            </mat-form-field>
+
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <input matInput type="text" placeholder="Ex: Maria F." name="aberto" formControlName="aberto">
+            </mat-form-field>
+    
+
+
+
+
         </div>
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total Avista Caixa</mat-label>
-                <input matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorTotalAvista"
-                       formControlName="valorTotalAvista"
+                <mat-label>Valor Pagamento Dinheiro</mat-label>
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorPagamentoDinheiro"
+                       formControlName="valorPagamentoDinheiro"
                        type="text" min="0">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total Fechamento Avista</mat-label>
-                <input disabled matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorFechamentoAvista"
-                       formControlName="valorFechamentoAvista"
+                <mat-label>Valor Total Fechamento Dinheiro</mat-label>
+                <input disabled matInput   currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valorFechamentoDinheiro"
+                       formControlName="valorFechamentoDinheiro"
+                       type="text" min="0" (keydown.Tab)= verificaDiferenca()>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Diferença Dinheiro</mat-label>
+                <input matInput  placeholder="Ex: R$ 10.0" name="diferencaDinheiro"
+                       formControlName="diferencaDinheiro"
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       type="text" >
+            </mat-form-field>
+        </div>
+
+        <div style="display:flex ;flex-direction: row">
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total PIX</mat-label>
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorPagamentoPix"
+                       formControlName="valorPagamentoPix"
+                       type="text" min="0">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total Fechamento PIX</mat-label>
+                <input matInput prefix="R$ " m  currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       name="valorFechamentoPix"
+                       formControlName="valorFechamentoPix"
                        type="text" min="0" (keydown.Tab)= verificaDiferenca()>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Diferença Avista</mat-label>
-                <input matInput  placeholder="Ex: R$ 10.0" name="diferencaAvista"
-                       formControlName="diferencaAvista"
+                <mat-label>Diferenca PIX</mat-label>
+                <input matInput placeholder="Ex: R$ 10.0" name="diferencaPix"
+                       formControlName="diferencaPix"
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       type="text" >
+            </mat-form-field>
+        </div>
+
+
+        
+        <div style="display:flex ;flex-direction: row">
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total Cartão Credito</mat-label>
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorPagamentoCartaoCredito"                       
+                       formControlName="valorPagamentoCartaoCredito"
+                       type="text" min="0">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total Fechamento Cartão Credito </mat-label>
+                <input matInput prefix="R$ "   currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"name="valorFechamentoCartaoCredito"
+                       formControlName="valorFechamentoCartaoCredito"
+                       type="text" (keydown.Tab)= verificaDiferenca()>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Diferenca Cartão Credito</mat-label>
+                <input matInput placeholder="Ex: R$ 10.0" name="diferencaCartaoCredito"
+                       formControlName="diferencaCartaoCredito"
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       type="text" >
+            </mat-form-field>
+        </div>
+
+        <div style="display:flex ;flex-direction: row">
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total Cartão Debito</mat-label>
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorPagamentoCartaoDebito"                       
+                       formControlName="valorPagamentoCartaoDebito"
+                       type="text" min="0">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Valor Total Fechamento Cartão Debito </mat-label>
+                <input matInput prefix="R$ "   currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"name="valorFechamentoCartaoDebito"
+                       formControlName="valorFechamentoCartaoDebito"
+                       type="text" (keydown.Tab)= verificaDiferenca()>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Diferenca Cartão Debito</mat-label>
+                <input matInput placeholder="Ex: R$ 10.0" name="diferencaCartaoDebito"
+                       formControlName="diferencaCartaoDebito"
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        type="text" >
             </mat-form-field>
         </div>
         <div style="display:flex ;flex-direction: row">
-
-
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total  Cartão</mat-label>
-                <input matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorTotalCartao"
-                       formControlName="valorTotalCartao"
+                <mat-label>Valor Total Consignado</mat-label>
+                <input matInput 
+                       currencyMask
+                       [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                       placeholder="Ex: R$ 10.0" name="valorPagamentoConsignado"                       
+                       formControlName="valorPagamentoConsignado"
                        type="text" min="0">
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Valor Total Fechamento Cartão</mat-label>
-                <input matInput prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: R$ 10.0" name="valorTotalCartaoFechamento"
-                       formControlName="valorTotalCartaoFechamento"
-                       type="text" min="0" (keydown.Tab)= verificaDiferenca()>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Diferenca Cartão</mat-label>
-                <input matInput placeholder="Ex: R$ 10.0" name="diferencaCartao"
-                       formControlName="diferencaCartao"
-                       type="text" >
-            </mat-form-field>
+
         </div>
 
     </form>
 
-    <button mat-raised-button [disabled]="!caixa.valid" (click)="fecharCaixa()" color="primary">
+    <button mat-raised-button [disabled]="disable === true && this.caixaF.aberto? false: true" (click)="fecharCaixa()"
+        color="primary">
         Fechar Caixa
     </button>
-
+    
     <button mat-raised-button (click)="cancelar()">
         Cancelar
     </button>
-
-    <button mat-raised-button routerLink="/relatorio-caixa-fechamento">
+    
+    
+    <button mat-raised-button [disabled]="disable === true ? false: true" routerLink="/relatorio-caixa-fechamento">
+        Relatorio Pagamentos
+    </button>
+    
+    <button mat-raised-button [disabled]="disable=== true  &&  !this.caixaF.aberto ? false: true" (click)="fecharCaixa()"
+        color="primary">
         Relatorio Fechamento
     </button>
+    
+   
 
 
 
