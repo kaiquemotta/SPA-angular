@@ -11,7 +11,7 @@ import {ModoPagamentoModel} from "./modo-pagamento.model";
 })
 export class ModoPagamentoService {
 
-    baseUrl = "https://pdv-back.herokuapp.com/modoPagamento"
+    baseUrl = "http://localhost:8080/modoPagamento"
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {

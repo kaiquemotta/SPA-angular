@@ -15,7 +15,7 @@ export class ModoPagamentoUpdateComponent implements OnInit {
     modoPagamento: ModoPagamentoModel = {
         descricao: '',
         taxa: 0,
-        porcentagemDesconto: 0,
+        porcentagemDesconto: '',
         troco:false,
         aVista: false,
     }

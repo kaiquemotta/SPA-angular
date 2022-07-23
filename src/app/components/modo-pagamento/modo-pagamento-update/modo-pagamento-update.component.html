@@ -9,16 +9,16 @@
 <!--        <mat-form-field appearance="outline">-->
 <!--            <mat-label>Taxa</mat-label>-->
 <!--            <input matInput placeholder="Ex: 00.02" [(ngModel)]="modoPagamento.taxa" name="taxa"  mask="percent" suffix="%" >-->
-<!--        </mat-form-field>-->
+<!--        </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Taxa desconto permitido</mat-label>
             <input matInput placeholder="Ex: 00.02" [(ngModel)]="modoPagamento.porcentagemDesconto" name="porcentagemDesconto" mask="percent" suffix="%" >
         </mat-form-field>
 
-<!--        <mat-checkbox [(ngModel)]="modoPagamento.troco" name="troco">Troco</mat-checkbox>-->
+        <mat-checkbox [(ngModel)]="modoPagamento.troco" name="troco">Troco</mat-checkbox>
         <mat-checkbox [(ngModel)]="modoPagamento.aVista" name="aVista">A vista</mat-checkbox>
-
+-->
     </form>
 
     <button mat-raised-button (click)="updateModoPagamento()" color="primary">

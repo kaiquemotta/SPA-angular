@@ -65,6 +65,7 @@ import { RelatorioCaixaComponent } from './reports/relatorio-caixa/relatorio-cai
 import { ComprovanteVendaComponent } from './components/comprovante-venda/comprovante-venda.component'; //add this line
 import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { CustomCurrencyMaskConfig } from './utils/CustomCurrencyMaskConfig';
+import { PercentageMaskDirective } from './components/modo-pagamento/modo-pagamento-create/percentage-mask.directive';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -105,6 +106,7 @@ const maskConfig: Partial<IConfig> = {
         FechamentoCaixaComponent,
         RelatorioCaixaComponent,
         ComprovanteVendaComponent,
+        PercentageMaskDirective
 
     ],
     imports: [
@@ -135,8 +137,13 @@ const maskConfig: Partial<IConfig> = {
         PdfViewerModule,
         MatMenuModule,
         CurrencyMaskModule,
+        NgxMaskModule.forRoot(),
+
 
     ],
+    exports: [
+        PercentageMaskDirective
+      ],
     providers: [ { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
     bootstrap: [AppComponent]
 })

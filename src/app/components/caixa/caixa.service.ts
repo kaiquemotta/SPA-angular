@@ -11,7 +11,7 @@ import {CaixaModel} from "./caixa.model";
 })
 export class CaixaService {
 
-    baseUrl = "https://pdv-back.herokuapp.com/caixa"
+    baseUrl = "http://localhost:8080/caixa"
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {

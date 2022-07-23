@@ -20,7 +20,7 @@ export class ModoPagamentoReadComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   // displayedColumns = ['id', 'descricao','taxa','porcentagemDesconto','troco','aVista', 'acoes'];
-  displayedColumns = ['id', 'descricao','porcentagemDesconto','aVista', 'acoes'];
+  displayedColumns = ['id', 'descricao', 'acoes'];
   EXAMPLE_DATA: ModoPagamentoModel[]
   dataSource = new MatTableDataSource<ModoPagamentoModel>(this.EXAMPLE_DATA);
 
