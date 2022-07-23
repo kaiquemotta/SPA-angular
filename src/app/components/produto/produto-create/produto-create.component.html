@@ -3,7 +3,8 @@
     <form [formGroup]="produto">
         <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Ex: Coca-Cola" type="text"  name="nome" formControlName="nome">
+            <input autocomplete="off" matInput placeholder="Ex: Coca-Cola" type="text" name="nome"
+                formControlName="nome">
             <mat-error *ngIf="produto.touched || produto.dirty && p.nome.errors?.required">Preencha o
                 campo
                 nome
@@ -12,15 +13,16 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Preço</mat-label>
-            <input matInput  prefix="R$ " mask="separator.2" thousandSeparator="." placeholder="Ex: 10" name="preco" formControlName="preco"
-                   type="text" min="0">
+            <input matInput 
+             currencyMask
+             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+             formControlName="preco">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Categoria</mat-label>
             <!--salva o valor de value em ngModel-->
-            <mat-select placeholder="Categorias"
-                        formControlName="categoria">
+            <mat-select placeholder="Categorias" formControlName="categoria">
                 <mat-option *ngFor="let cat of categorias" [value]="cat">
                     {{cat.nome}}
                 </mat-option>

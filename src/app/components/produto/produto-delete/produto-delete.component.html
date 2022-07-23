@@ -1,19 +1,20 @@
 <mat-card>
-    <mat-card-title>Atualizar Produto</mat-card-title>
+    <mat-card-title>Deletar Produto</mat-card-title>
     <form>
         <mat-form-field appearance="outline">
             <input matInput placeholder="Produto" [(ngModel)]="produto.nome" name="nome" disabled>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <input matInput placeholder="Preço" [(ngModel)]="produto.preco" name="preco" disabled>
+            <input matInput placeholder="Preço"  currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"[(ngModel)]="produto.preco" name="preco" disabled>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-label>Select</mat-label>
+            <mat-label>Categoria</mat-label>
             <!--salva o valor de value em ngModel-->
-            <mat-select placeholder="Categorias" [(ngModel)]="produto.categoria" name="categoria" disabled>
-                <mat-option *ngFor="let cat of categorias" [value]="cat">
+            <mat-select placeholder="Categorias" [(ngModel)]="produto.categoria.id" name="categoria" disabled>
+                <mat-option *ngFor="let cat of categorias" [value]="cat.id">
                     {{cat.nome}}
                 </mat-option>
             </mat-select>

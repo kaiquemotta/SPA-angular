@@ -8,7 +8,8 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Preço</mat-label>
-            <input matInput placeholder="Ex: 10" [(ngModel)]="produto.preco" name="preco" required>
+            <input matInput placeholder="Ex: 10"  currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"[(ngModel)]="produto.preco" name="preco" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline">

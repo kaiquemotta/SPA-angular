@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ProdutoService} from "../produto.service";
-import {Router} from "@angular/router";
-import {CategoriaService} from "../../categoria/categoria.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { ProdutoService } from "../produto.service";
+import { Router } from "@angular/router";
+import { CategoriaService } from "../../categoria/categoria.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
     selector: 'app-produto-create',
@@ -16,9 +16,9 @@ export class ProdutoCreateComponent implements OnInit {
     categorias: any
 
     constructor(private produtoService: ProdutoService,
-                private categoriaService: CategoriaService,
-                private router: Router,
-                private fb: FormBuilder) {
+        private categoriaService: CategoriaService,
+        private router: Router,
+        private fb: FormBuilder) {
     }
 
     ngOnInit(): void {
@@ -51,6 +51,8 @@ export class ProdutoCreateComponent implements OnInit {
     cancelar(): void {
         this.router.navigate(["/produtos"]);
     }
+
+ 
 
     findAllCategorias(): void {
         this.categoriaService.findAll().subscribe(categorias => {

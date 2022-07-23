@@ -63,6 +63,8 @@ import { FechaCaixaComponent } from './components/caixa/fecha-caixa/fecha-caixa.
 import { FechamentoCaixaComponent } from './views/caixa/fechamento-caixa/fechamento-caixa.component';
 import { RelatorioCaixaComponent } from './reports/relatorio-caixa/relatorio-caixa.component';
 import { ComprovanteVendaComponent } from './components/comprovante-venda/comprovante-venda.component'; //add this line
+import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import { CustomCurrencyMaskConfig } from './utils/CustomCurrencyMaskConfig';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -132,9 +134,10 @@ const maskConfig: Partial<IConfig> = {
         BrowserModule,
         PdfViewerModule,
         MatMenuModule,
+        CurrencyMaskModule,
 
     ],
-    providers: [],
+    providers: [ { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
     bootstrap: [AppComponent]
 })
 
