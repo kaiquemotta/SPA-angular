@@ -20,7 +20,8 @@ export class CategoriaCreateComponent implements OnInit {
     ngOnInit(): void {
 
         this.categoria = this.fb.group({
-            nome: ['', Validators.required]
+            nome: ['', Validators.required],
+            impressora:['',Validators.required]
         })
     }
 
@@ -36,6 +37,7 @@ export class CategoriaCreateComponent implements OnInit {
 
         //subscribe depois que ele recebe o retorno do back-end ele chama essa arrow function
         this.categoriaService.insert(this.categoria.value).subscribe(() => {
+            console.log(this.categoria)
             this.categoriaService.mostrarMessagem('Categoria criada com sucesso!', false)
             this.router.navigate(["/categorias"]);
         })

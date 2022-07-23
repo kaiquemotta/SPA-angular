@@ -1,9 +1,21 @@
 <mat-card>
-    <mat-card-title>Nova Categoria</mat-card-title>
+    <mat-card-title>Alterar Categoria</mat-card-title>
     <form>
         <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Ex: Refrigerante" [(ngModel)]="categoria.nome" name="nome" required>
+            <input matInput  autocomplete="off" placeholder="Ex: Refrigerante" [(ngModel)]="categoria.nome" name="nome" required>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <!--salva o valor de value em ngModel-->
+            <mat-select placeholder="Categorias" [(ngModel)]="categoria.impressora" name="categoria" required>
+                <mat-option value="Cozinha">Cozinha</mat-option>
+                <mat-option value="Bebida">Bebida</mat-option>
+                <mat-option value="Caixa">Caixa</mat-option>
+                <mat-option value="Nenhuma">Nenhuma</mat-option>
+            </mat-select>
         </mat-form-field>
     </form>
 

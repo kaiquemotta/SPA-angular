@@ -1,4 +1,5 @@
 export interface CategoriaModel {
     id?: number,
-    nome: string
+    nome: string,
+    impressora:string
 }

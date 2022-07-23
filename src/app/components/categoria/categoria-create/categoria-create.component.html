@@ -3,10 +3,27 @@
     <form [formGroup]="categoria">
         <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput type="text"  placeholder="Ex: Refrigerante" name="nome" formControlName="nome">
+            <input matInput type="text"   autocomplete="off" placeholder="Ex: Refrigerante" name="nome" formControlName="nome">
             <mat-error
                     *ngIf="categoria.touched || categoria.dirty && c.nome.errors?.required">Preencha o campo
                 nome
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Impressora</mat-label>
+            <!--salva o valor de value em ngModel-->
+            <mat-select placeholder="Impressoras"formControlName="impressora">
+
+                 <mat-option value="Cozinha">Cozinha</mat-option>
+                 <mat-option value="Bebida">Bebida</mat-option>
+                 <mat-option value="Caixa">Caixa</mat-option>
+                 <mat-option value="Nenhuma">Nenhuma</mat-option>
+
+
+            </mat-select>
+            <mat-error>Preencha o campo Impressora
             </mat-error>
         </mat-form-field>
     </form>

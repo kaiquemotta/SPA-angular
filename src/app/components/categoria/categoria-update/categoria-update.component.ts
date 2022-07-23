@@ -12,7 +12,8 @@ import {Observable} from "rxjs";
 export class CategoriaUpdateComponent implements OnInit {
 
   categoria: CategoriaModel = {
-    nome: ''
+    nome: '',
+    impressora:''
   }
 
   constructor(private categoriaService: CategoriaService,
