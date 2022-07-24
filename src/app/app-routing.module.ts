@@ -23,6 +23,7 @@ import {FechamentoCaixaComponent} from "./views/caixa/fechamento-caixa/fechament
 import {RelatorioCaixaComponent} from "./reports/relatorio-caixa/relatorio-caixa.component";
 import {ComprovanteVendaComponent} from "./components/comprovante-venda/comprovante-venda.component";
 import { ConsultaCaixaComponent } from './views/caixa/consulta-caixa/consulta-caixa.component';
+import { TestPrintComponent } from './views/caixa/test-print/test-print.component';
 
 const routes: Routes = [
     {
@@ -86,6 +87,10 @@ const routes: Routes = [
         component: VendaCreateComponent, data: {some_data: 'some value'}
     },
     {
+        path: "relatorio-caixa-fechamento/:id",
+        component: RelatorioCaixaComponent
+    },
+    {
         path: "modosPagamentos",
         component: ModoPagamentoComponent
     },
@@ -111,14 +116,16 @@ const routes: Routes = [
         path: "fecha-caixa",
         component: FechamentoCaixaComponent
     },
+
+    {
+        path: "test",
+        component: TestPrintComponent
+    },
     {
         path: "consult-caixas",
         component: ConsultaCaixaComponent
     },
-    {
-        path: "relatorio-caixa-fechamento",
-        component: RelatorioCaixaComponent
-    },
+
     {
         path: "imprime-comprovante",
         component: ComprovanteVendaComponent
