@@ -179,25 +179,27 @@
         </div>
 
     </form>
-
-    <button mat-raised-button [disabled]="disable === true && this.caixaF.aberto? false: true" (click)="fecharCaixa()"
-        color="primary">
-        Fechar Caixa
-    </button>
+    <div *ngIf="this.caixaF">
     
-    <button mat-raised-button (click)="cancelar()">
-        Cancelar
-    </button>
+        <button mat-raised-button [disabled]="disable === true && this.caixaF && this.caixaF.aberto? false: true"
+            (click)="fecharCaixa()" color="primary">
+            Fechar Caixa
+        </button>
     
+        <button mat-raised-button (click)="cancelar()">
+            Cancelar
+        </button>
     
-    <button mat-raised-button [disabled]="disable === true ? false: true" routerLink="/relatorio-caixa-fechamento/{{caixaF.id}}">
-        Relatorio Pagamentos
-    </button>
+        <button mat-raised-button [disabled]="disable === true ? false: true"
+            routerLink="/relatorio-caixa-fechamento/{{caixaF.id}}">
+            Relatorio Pagamentos
+        </button>
     
-    <button mat-raised-button [disabled]="disable=== true  &&  !this.caixaF.aberto ? false: true" routerLink="/relatorio-caixa-fechamento"
-        color="primary">
-        Relatorio Fechamento
-    </button>
+        <button mat-raised-button [disabled]="disable=== true  &&  this.caixaF && !this.caixaF.aberto ? false: true"
+            routerLink="/relatorio-caixa-fechamento" color="primary">
+            Relatorio Fechamento
+        </button>
+    </div>
     
    
 

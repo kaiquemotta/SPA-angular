@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CaixaModel } from 'src/app/components/caixa/caixa.model';
 import { CaixaService } from 'src/app/components/caixa/caixa.service';
+import { PagamentoComponent } from 'src/app/components/pagamento/pagamento.component';
 import { HeaderService } from 'src/app/components/template/header/header.service';
+import { ViewCaixaComponent } from '../view-caixa/view-caixa.component';
 
 @Component({
   selector: 'app-consulta-caixa',
@@ -23,7 +26,7 @@ export class ConsultaCaixaComponent implements OnInit {
   EXAMPLE_DATA: CaixaModel[]
   dataSource = new MatTableDataSource<CaixaModel>(this.EXAMPLE_DATA);
 
-  constructor(private caixaService: CaixaService,
+  constructor(private caixaService: CaixaService,public dialog: MatDialog,
     headerService: HeaderService) {
     headerService.headerData = {
       titulo: 'Lista Caixas',
@@ -45,4 +48,20 @@ export class ConsultaCaixaComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
+
+
+  viewCaixa(idd) {
+
+    let dialogRef = this.dialog.open(ViewCaixaComponent, {
+        width: '1200x',
+        height: '650px',
+        data: {id: idd}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        if (result == "SIM") {
+
+        }
+    });
+}
 }

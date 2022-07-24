@@ -1,3 +1,5 @@
+import { PagamentoModel } from "../pagamento/pagamento.model"
+
 export interface CaixaModel {
     id?: number
     nome?: string
@@ -26,6 +28,7 @@ export interface CaixaModel {
     valorPagamentoCartaoDebito?: number,
 
     valorPagamentoConsignado?: number
+    pagamentos?:Array<PagamentoModel>,
 
     dataAbertura?:string,
     dataFechamento?:string,

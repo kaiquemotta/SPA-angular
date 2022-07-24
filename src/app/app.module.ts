@@ -70,6 +70,7 @@ import { ConsultaCaixaComponent } from './views/caixa/consulta-caixa/consulta-ca
 import { ThermalPrintModule } from 'ng-thermal-print';
 import { TestPrintComponent } from './views/caixa/test-print/test-print.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ViewCaixaComponent } from './views/caixa/view-caixa/view-caixa.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -113,6 +114,7 @@ const maskConfig: Partial<IConfig> = {
         PercentageMaskDirective,
         ConsultaCaixaComponent,
         TestPrintComponent,
+        ViewCaixaComponent,
 
 
     ],

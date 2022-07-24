@@ -48,6 +48,15 @@ export class CaixaService {
         )
     }
 
+    findByUsuario(id: number): Observable<CaixaModel>{
+        const url =`${this.baseUrl}/findByUsuario/${id}`
+        return this.http.get<CaixaModel>(url).pipe(
+            map(obj => obj)
+          ,
+            catchError(e => this.errorHandler(e))
+        )
+    }
+
     update(caixa: CaixaModel): Observable<CaixaModel> {
         const url = `${this.baseUrl}/${caixa.id}`
         return this.http.put<CaixaModel>(url, caixa).pipe(
