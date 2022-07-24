@@ -104,7 +104,7 @@ export class PagamentoComponent implements OnInit {
         if (this.pagamento.invalid || this.pagamento.controls.valorPagamento.value == 0
             || (this.pagamento.controls.valorPagamento.value > this.restante && !this.modoPagamento.aVista)
         ) {
-            this.modoPagamentoService.mostrarMessagem("Erro ao adicionar pagamento", true)
+            this.modoPagamentoService.mostrarMessagem("Erro", true)
             this.pagamento.controls.valorPagamento.setValue(0)
             return;
         } else if (!this.modoPagamento.aVista) {

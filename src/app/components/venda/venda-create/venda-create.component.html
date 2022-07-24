@@ -3,7 +3,7 @@
     <form [formGroup]="venda">
         <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Ex: Claudio" name="nomeComanda" formControlName="nomeComanda">
+            <input matInput autocomplete="off" placeholder="Ex: Claudio" name="nomeComanda" formControlName="nomeComanda">
             <mat-error
                     *ngIf="venda.touched || venda.dirty && c.nomeComanda.errors?.required">Preencha o campo
                 nome
