@@ -6,6 +6,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { ProdutoModel } from "../../produto/produto.model";
 import { CaixaModel } from "../caixa.model";
+import { HeaderService } from '../../template/header/header.service';
 
 @Component({
     selector: 'app-fecha-caixa',
@@ -20,7 +21,13 @@ export class FechaCaixaComponent implements OnInit {
 
     constructor(private caixaService: CaixaService,
         private router: Router,
-        private fb: FormBuilder) {
+        private fb: FormBuilder,
+        headerService: HeaderService) {
+            headerService.headerData = {
+              titulo: 'Fechamento Caixa',
+              icone: 'lock',
+              routeUrl: '/'
+            }
     }
 
     ngOnInit(): void {

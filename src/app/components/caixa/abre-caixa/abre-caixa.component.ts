@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoriaService} from "../../categoria/categoria.service";
-import {Router} from "@angular/router";
-import {CaixaService} from "../caixa.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CategoriaService } from "../../categoria/categoria.service";
+import { Router } from "@angular/router";
+import { CaixaService } from "../caixa.service";
+import { HeaderService } from '../../template/header/header.service';
 
 @Component({
   selector: 'app-abre-caixa',
@@ -14,8 +15,14 @@ export class AbreCaixaComponent implements OnInit {
   caixa: FormGroup
 
   constructor(private caixaService: CaixaService,
-              private router: Router,
-              private fb: FormBuilder) {
+    private router: Router,
+    private fb: FormBuilder,
+     headerService: HeaderService) {
+    headerService.headerData = {
+      titulo: 'Abertura Caixa',
+      icone: 'lock_open',
+      routeUrl: '/'
+    }
   }
 
   ngOnInit(): void {

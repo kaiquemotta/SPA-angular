@@ -1,13 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {ModoPagamentoService} from "../modo-pagamento/modo-pagamento.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {VendaModel} from "../venda/venda.model";
-import {VendaService} from "../venda/venda.service";
-import {PagamentoModel} from "./pagamento.model";
-import {PagamentoService} from "./pagamento.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
+import { ModoPagamentoService } from "../modo-pagamento/modo-pagamento.service";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { VendaModel } from "../venda/venda.model";
+import { VendaService } from "../venda/venda.service";
+import { PagamentoModel } from "./pagamento.model";
+import { PagamentoService } from "./pagamento.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -22,11 +23,11 @@ export class PagamentoComponent implements OnInit {
     dataSource: MatTableDataSource<PagamentoModel>;
     modosPagamentos: any
     pagamento: FormGroup;
-    pagamentos: PagamentoModel [] = [];
+    pagamentos: PagamentoModel[] = [];
     modoPagamento: any;
     restante: number;
     troco: number;
-
+    btn: boolean = true;
 
     venda: VendaModel = {
         id: 0,
@@ -59,16 +60,16 @@ export class PagamentoComponent implements OnInit {
 
     ngOnInit(): void {
         this.pagamento = this.fb.group({
-            id: [{value: '', disabled: true}],
-            modoPagamento: [{value: '', disabled: false,}],
-            total: [{value: this.venda.valorTotal, disabled: true}],
-            restante: [{value: 0.00, disabled: true}],
-            subTotal: [{value: this.venda.subTotal, disabled: true}],
-            porcentagemDesconto: [{value: '', disabled: true}],
-            valorPagamento: [{value: '', disabled: true}, Validators.required],
-            idVenda: [{value: this.data.id, disabled: false}],
-            quantidadeParcela: [{value: '', disabled: true}, Validators.required],
-            troco: [{value: '', disabled: true}],
+            id: [{ value: '', disabled: true }],
+            modoPagamento: [{ value: '', disabled: false, }],
+            total: [{ value: this.venda.valorTotal, disabled: true }],
+            restante: [{ value: 0.00, disabled: true }],
+            subTotal: [{ value: this.venda.subTotal, disabled: true }],
+            porcentagemDesconto: [{ value: '', disabled: true }],
+            valorPagamento: [{ value: '', disabled: true }, Validators.required],
+            idVenda: [{ value: this.data.id, disabled: false }],
+            quantidadeParcela: [{ value: '', disabled: true }, Validators.required],
+            troco: [{ value: '', disabled: true }],
 
         })
 
@@ -94,7 +95,6 @@ export class PagamentoComponent implements OnInit {
     private vendaFindById() {
         this.vendaService.findById(this.data.id).subscribe(venda => {
             this.venda = venda;
-            this.somaRestante();
             this.findAllPagamentos();
             this.findAllModosPagamentos();
         })
@@ -102,29 +102,28 @@ export class PagamentoComponent implements OnInit {
 
     addPagamento() {
         if (this.pagamento.invalid || this.pagamento.controls.valorPagamento.value == 0
-            || (this.pagamento.controls.valorPagamento.value > this.restante && !this.modoPagamento.aVista)
+            || (this.pagamento.controls.valorPagamento.value > this.restante && this.modoPagamento.id !== 1)
         ) {
             this.modoPagamentoService.mostrarMessagem("Erro", true)
             this.pagamento.controls.valorPagamento.setValue(0)
             return;
-        } else if (!this.modoPagamento.aVista) {
+        } else if (this.modoPagamento.id !== 1) {
             this.pagamentoService.insert(this.pagamento.value).subscribe(pagamento => {
                 this.pagamentoModel = pagamento
-                this.pagamentos.push({...this.pagamentoModel})
+                this.pagamentos.push({ ...this.pagamentoModel })
                 this.dataSource = new MatTableDataSource(this.pagamentos);
                 this.calculaRestante();
+                this.trataBotao();
+
             })
-        } else if (this.modoPagamento.aVista) {
-            console.log("a vista")
-            if(this.pagamento.controls.valorPagamento.value > this.restante){
-                this.pagamento.controls.valorPagamento.setValue(this.restante);
-            }
+        } else if (this.modoPagamento.id === 1) {
+            this.verificaTroco();
             this.pagamentoService.insert(this.pagamento.value).subscribe(pagamento => {
                 this.pagamentoModel = pagamento
-                this.pagamentos.push({...this.pagamentoModel})
+                this.pagamentos.push({ ...this.pagamentoModel })
                 this.dataSource = new MatTableDataSource(this.pagamentos);
                 this.calculaRestante();
-                this.verificaTroco();
+                this.trataBotao();
             })
         }
     }
@@ -134,6 +133,7 @@ export class PagamentoComponent implements OnInit {
             this.pagamentos = pagamentos
             this.dataSource = new MatTableDataSource(this.pagamentos);
             this.somaRestante();
+            this.trataBotao();
         })
     }
 
@@ -161,9 +161,18 @@ export class PagamentoComponent implements OnInit {
     private calculaRestante() {
         if (this.pagamento.controls.valorPagamento.value <= this.restante) {
             this.restante -= this.pagamento.controls.valorPagamento.value;
-        } else if (this.pagamento.controls.valorPagamento.value >= this.restante && this.modoPagamento.aVista) {
+        } else if (this.pagamento.controls.valorPagamento.value >= this.restante && this.modoPagamento.id === 1) {
             this.restante = 0;
+            this.trataBotao();
         }
+    }
+    trataBotao() {
+        console.log(this.venda);
+        if (this.restante === 0 && this.venda.finalizada === false) {
+
+            this.btn = false;
+        }
+
     }
 
     finalizaVenda() {
@@ -174,7 +183,7 @@ export class PagamentoComponent implements OnInit {
                 this.router.navigate(["venda"]);
             })
         }
-        else{
+        else {
             this.vendaService.mostrarMessagem('Erro, pagamento não recebido', true)
         }
     }
@@ -184,7 +193,7 @@ export class PagamentoComponent implements OnInit {
         for (let pagamento of this.pagamentos) {
             soma += pagamento.valorPagamento;
         }
-        this.restante = this.venda.valorTotal - soma;
+        this.restante = this.venda.valorTotal - soma < 0 ? 0 : this.venda.valorTotal - soma;
 
     }
 
@@ -195,8 +204,10 @@ export class PagamentoComponent implements OnInit {
     }
 
     verificaTroco() {
-        if (this.modoPagamento.aVista && this.pagamento.controls.valorPagamento.value > this.restante && this.restante != 0) {
+        if (this.modoPagamento.id === 1 && this.pagamento.controls.valorPagamento.value > this.restante && this.restante != 0) {
             this.pagamento.controls.troco.setValue(this.pagamento.controls.valorPagamento.value - this.restante);
+            this.pagamento.value.troco = this.pagamento.controls.valorPagamento.value - this.restante;
+
             // this.pagamento.controls.valorPagamento.setValue(0.00)
         }
     }

@@ -22,6 +22,7 @@ import {CriaCaixaComponent} from "./views/caixa/cria-caixa/cria-caixa.component"
 import {FechamentoCaixaComponent} from "./views/caixa/fechamento-caixa/fechamento-caixa.component";
 import {RelatorioCaixaComponent} from "./reports/relatorio-caixa/relatorio-caixa.component";
 import {ComprovanteVendaComponent} from "./components/comprovante-venda/comprovante-venda.component";
+import { ConsultaCaixaComponent } from './views/caixa/consulta-caixa/consulta-caixa.component';
 
 const routes: Routes = [
     {
@@ -109,6 +110,10 @@ const routes: Routes = [
     {
         path: "fecha-caixa",
         component: FechamentoCaixaComponent
+    },
+    {
+        path: "consult-caixas",
+        component: ConsultaCaixaComponent
     },
     {
         path: "relatorio-caixa-fechamento",

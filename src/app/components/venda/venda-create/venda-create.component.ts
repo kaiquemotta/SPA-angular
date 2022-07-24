@@ -13,6 +13,7 @@ export class VendaCreateComponent implements OnInit {
 
 
   venda: FormGroup;
+  balcao: String;
 
   constructor(private vendaService: VendaService,
               private router: Router,
@@ -20,9 +21,8 @@ export class VendaCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.venda = this.fb.group({
-      nomeComanda: ['', Validators.required]
+      nomeComanda: ['', Validators.required],
     })
   }
 
@@ -43,6 +43,14 @@ export class VendaCreateComponent implements OnInit {
     })
   }
 
+  checkCheckBoxvalue(event){
+    console.log(event.checked)
+    if(event.checked){
+      this.venda.value.nomeComanda = "Balcão";
+      this.balcao = "Balcão";
+
+    }
+  }
   cancelar(): void {
     this.router.navigate(["/venda"]);
   }

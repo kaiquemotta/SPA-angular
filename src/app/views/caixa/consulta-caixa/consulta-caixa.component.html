@@ -1,0 +1,73 @@
+<div class="mat-elevation-z8">
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let caixa">{{caixa.id}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="caixad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let caixa">{{caixa.aberto === true ? 'Aberto': 'Fechado'}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let caixa">{{caixa.nome}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="valorAbertura">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor Abertura</th>
+            <td mat-cell *matCellDef="let caixa">
+                <input matInput
+                disabled="true" 
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                value="{{caixa.valorAbertura}}"> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valorFechamento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor Fechamento</th>
+            <td mat-cell *matCellDef="let caixa">
+                <input matInput
+                disabled="true" 
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                value="{{caixa.valorFechamento}}"> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataAbertura">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Abertura</th>
+            <td mat-cell *matCellDef="let caixa">{{caixa.dataAbertura}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataFechamento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Fechamento</th>
+            <td mat-cell *matCellDef="let caixa">{{caixa.dataFechamento !== null? caixa.dataFechamento : '------- Aberto
+                -------' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
+
+            <td mat-cell *matCellDef="let caixa">
+
+                <button mat-icon-button routerLink="/caixa/caixa/{{caixa.id}}" class="edit">
+                    <mat-icon>search</mat-icon>
+                </button>
+
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let categoria; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="5"
+        [pageSizeOptions]="[5, 25, 50]">
+    </mat-paginator>
+</div>

@@ -12,7 +12,7 @@ import {VendaService} from "../../components/venda/venda.service";
 })
 export class RelatoriosComponent {
 
-  pdfSrc = "https://pdv-back.herokuapp.com/venda/vendas/export/pdf";
+  pdfSrc = "http://localhost:8080/venda/vendas/export/pdf";
 
   constructor(private vendaService: VendaService,
               private router: Router,

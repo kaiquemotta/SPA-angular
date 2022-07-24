@@ -9,7 +9,7 @@ import {HeaderService} from "../../components/template/header/header.service";
 })
 export class ModoPagamentoComponent implements OnInit {
 
-  constructor(private router: Router, private headerService: HeaderService) {
+  constructor(private router: Router, headerService: HeaderService) {
     headerService.headerData = {
       titulo: 'Cadastro de Modos de pagamentos',
       icone: 'payment',

@@ -194,7 +194,7 @@
         Relatorio Pagamentos
     </button>
     
-    <button mat-raised-button [disabled]="disable=== true  &&  !this.caixaF.aberto ? false: true" (click)="fecharCaixa()"
+    <button mat-raised-button [disabled]="disable=== true  &&  !this.caixaF.aberto ? false: true" routerLink="/relatorio-caixa-fechamento"
         color="primary">
         Relatorio Fechamento
     </button>
