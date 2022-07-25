@@ -4,7 +4,7 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
             <mat-form-field appearance="outline">
-                <mat-label>Nome</mat-label>
+                <mat-label>Login</mat-label>
                 <input matInput type="text" autocomplete="off"  name="nome"
                     formControlName="username">
                 <mat-error >Preencha o campo
@@ -13,8 +13,8 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Nome</mat-label>
-                <input matInput type="text" autocomplete="off"  name="nome"
+                <mat-label>Senho</mat-label>
+                <input matInput type="password" autocomplete="off"  name="nome"
                     formControlName="password">
                 <mat-error >Preencha o campo
                     nome
