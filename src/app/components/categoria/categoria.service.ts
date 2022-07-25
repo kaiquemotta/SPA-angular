@@ -5,13 +5,14 @@ import {CategoriaModel} from "./categoria.model";
 import {EMPTY, Observable} from "rxjs";
 import {ProdutoModel} from "../produto/produto.model";
 import {catchError, map} from "rxjs/operators";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CategoriaService {
 
-    baseUrl = "http://localhost:8080/categorias"
+    baseUrl = `${environment.apiUrl}/categorias`
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {

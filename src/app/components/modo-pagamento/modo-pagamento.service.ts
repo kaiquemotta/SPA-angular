@@ -1,20 +1,21 @@
-import {Injectable} from "@angular/core";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
-import {CategoriaModel} from "../categoria/categoria.model";
-import {EMPTY, Observable} from "rxjs";
-import {catchError, map} from "rxjs/operators";
-import {ModoPagamentoModel} from "./modo-pagamento.model";
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { HttpClient } from "@angular/common/http";
+import { CategoriaModel } from "../categoria/categoria.model";
+import { EMPTY, Observable } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import { ModoPagamentoModel } from "./modo-pagamento.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModoPagamentoService {
 
-    baseUrl = "http://localhost:8080/modoPagamento"
+    baseUrl = `${environment.apiUrl}/modoPagamento`
 
     constructor(private snackBar: MatSnackBar,
-                private http: HttpClient) {
+        private http: HttpClient) {
     }
 
     mostrarMessagem(msg: string, isError: boolean = false): void {
@@ -40,8 +41,8 @@ export class ModoPagamentoService {
         )
     }
 
-    findById(id: string): Observable<ModoPagamentoModel>{
-        const url =`${this.baseUrl}/${id}`
+    findById(id: string): Observable<ModoPagamentoModel> {
+        const url = `${this.baseUrl}/${id}`
         return this.http.get<ModoPagamentoModel>(url).pipe(
             map(obj => obj),
             catchError(e => this.errorHandler(e))

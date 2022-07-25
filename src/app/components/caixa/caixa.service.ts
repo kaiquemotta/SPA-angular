@@ -1,20 +1,21 @@
-import {Injectable} from '@angular/core';
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpClient} from "@angular/common/http";
-import {EMPTY, Observable} from "rxjs";
-import {ProdutoModel} from "../produto/produto.model";
-import {catchError, map} from "rxjs/operators";
-import {CaixaModel} from "./caixa.model";
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { HttpClient } from "@angular/common/http";
+import { EMPTY, Observable } from "rxjs";
+import { ProdutoModel } from "../produto/produto.model";
+import { catchError, map } from "rxjs/operators";
+import { CaixaModel } from "./caixa.model";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CaixaService {
 
-    baseUrl = "http://localhost:8080/caixa"
+    baseUrl = `${environment.apiUrl}/caixa`
 
     constructor(private snackBar: MatSnackBar,
-                private http: HttpClient) {
+        private http: HttpClient) {
     }
 
     mostrarMessagem(msg: string, isError: boolean = false): void {
@@ -40,19 +41,19 @@ export class CaixaService {
         )
     }
 
-    findById(id: number): Observable<CaixaModel>{
-        const url =`${this.baseUrl}/${id}`
+    findById(id: number): Observable<CaixaModel> {
+        const url = `${this.baseUrl}/${id}`
         return this.http.get<CaixaModel>(url).pipe(
             map(obj => obj),
             catchError(e => this.errorHandler(e))
         )
     }
 
-    findByUsuario(id: number): Observable<CaixaModel>{
-        const url =`${this.baseUrl}/findByUsuario/${id}`
+    findByUsuario(id: number): Observable<CaixaModel> {
+        const url = `${this.baseUrl}/findByUsuario/${id}`
         return this.http.get<CaixaModel>(url).pipe(
             map(obj => obj)
-          ,
+            ,
             catchError(e => this.errorHandler(e))
         )
     }
@@ -78,8 +79,8 @@ export class CaixaService {
         return EMPTY
     }
 
-    getCaixaFechar(): Observable<CaixaModel>{
-        const url =`${this.baseUrl}/caixaFechamento`
+    getCaixaFechar(): Observable<CaixaModel> {
+        const url = `${this.baseUrl}/caixaFechamento`
         console.log(url)
         return this.http.get<CaixaModel>(url).pipe(
             map(obj => obj),

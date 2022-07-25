@@ -4,13 +4,14 @@ import {HttpClient} from "@angular/common/http";
 import {VendaModel} from "./venda.model";
 import {EMPTY, Observable} from "rxjs";
 import {catchError, map} from "rxjs/operators";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class VendaService {
 
-    baseUrl = "http://localhost:8080/venda"
+    baseUrl = `${environment.apiUrl}/venda`
 
     constructor(private snackBar: MatSnackBar,
                 private http: HttpClient) {
