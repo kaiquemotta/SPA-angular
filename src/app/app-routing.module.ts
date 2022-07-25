@@ -98,14 +98,13 @@ const routes: Routes = [
         component: ModoPagamentoCreateComponent
     },
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    
+
     { path: 'login', component: LoginComponent },
 
-    
 
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' },
+
+
     {
         path: "modoPagamento/update/:id",
         component: ModoPagamentoUpdateComponent
@@ -137,7 +136,8 @@ const routes: Routes = [
         path: "imprime-comprovante",
         component: ComprovanteVendaComponent
     },
-
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
