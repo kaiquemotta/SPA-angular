@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HeaderService} from "./header.service";
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services';
+import { HeaderService } from "./header.service";
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import {HeaderService} from "./header.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { }
+  constructor(private router: Router, private headerService: HeaderService, private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +25,11 @@ export class HeaderComponent implements OnInit {
 
   get routeUrl(): string {
     return this.headerService.headerData.routeUrl
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

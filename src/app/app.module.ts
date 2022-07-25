@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { appRoutingModule, AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/template/header/header.component';
@@ -12,7 +12,6 @@ import { NavComponent } from './components/template/nav/nav.component';
 
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
-import { HomeComponent } from './views/home/home.component';
 
 import { MatCardModule } from "@angular/material/card";
 import { ProdutoComponent } from './views/produto/produto.component';
@@ -23,7 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { CategoriaCreateComponent } from './components/categoria/categoria-create/categoria-create.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -71,6 +70,9 @@ import { ThermalPrintModule } from 'ng-thermal-print';
 import { TestPrintComponent } from './views/caixa/test-print/test-print.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ViewCaixaComponent } from './views/caixa/view-caixa/view-caixa.component';
+import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './_helper';
+import { LoginComponent } from './login';
+import { HomeComponent } from './views/home/home.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -82,7 +84,6 @@ const maskConfig: Partial<IConfig> = {
         HeaderComponent,
         FooterComponent,
         NavComponent,
-        HomeComponent,
         ProdutoComponent,
         CategoriaComponent,
         ProdutoCreateComponent,
@@ -115,6 +116,9 @@ const maskConfig: Partial<IConfig> = {
         ConsultaCaixaComponent,
         TestPrintComponent,
         ViewCaixaComponent,
+        HomeComponent,
+        LoginComponent,
+        
 
 
     ],
@@ -147,12 +151,17 @@ const maskConfig: Partial<IConfig> = {
         MatMenuModule,
         CurrencyMaskModule,
         NgxMaskModule.forRoot(),
-        ThermalPrintModule
+        ThermalPrintModule,
+        appRoutingModule,
+        
+
     ],
     exports: [
         PercentageMaskDirective
     ],
-    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, { provide: MAT_DATE_LOCALE, useValue: "en-IN" }],
+    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    { provide: MAT_DATE_LOCALE, useValue: "en-IN" },   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },fakeBackendProvider],
     bootstrap: [AppComponent]
 })
 

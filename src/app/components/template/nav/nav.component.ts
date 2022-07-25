@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
+import { Router } from '@angular/router';
+import { User } from 'src/app/_models/user';
+import { AuthenticationService } from 'src/app/_services';
 
 @Component({
     selector: 'app-nav',
@@ -12,7 +15,15 @@ export class NavComponent {
     showSubmenu: boolean = false;
     isShowing = false;
     showSubmenuCaixa: boolean = false;
+    currentUser: User;
 
+
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService
+    ) {
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    }
     mouseenter() {
         if (!this.isExpanded) {
             this.isShowing = true;
@@ -23,5 +34,10 @@ export class NavComponent {
         if (!this.isExpanded) {
             this.isShowing = false;
         }
+    }
+
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
     }
 }

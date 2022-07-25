@@ -10,7 +10,7 @@
     color: white;
 }
 
-.header .logo{
+.header .logo {
     max-height: 40px;
 }
 
@@ -22,3 +22,8 @@
     padding-right: 5px;
 }
 
+.header .title-group2 {
+    padding-left: 25px;
+    text-align: left;
+
+}
