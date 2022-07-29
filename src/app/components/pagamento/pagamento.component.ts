@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { ModoPagamentoService } from "../modo-pagamento/modo-pagamento.service";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
@@ -9,6 +9,7 @@ import { PagamentoService } from "./pagamento.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { LoadingService } from '../loading/loading.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class PagamentoComponent implements OnInit {
     restante: number;
     troco: number;
     btn: boolean = true;
+    isloading: boolean = false;
 
     venda: VendaModel = {
         id: 0,
@@ -53,12 +55,20 @@ export class PagamentoComponent implements OnInit {
 
     constructor(
         public dialogRef: MatDialogRef<PagamentoComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any, private modoPagamentoService: ModoPagamentoService, private vendaService: VendaService, private pagamentoService: PagamentoService, private fb: FormBuilder, private router: Router,) {
+        @Inject(MAT_DIALOG_DATA) public data: any, private modoPagamentoService: ModoPagamentoService, private vendaService: VendaService, private pagamentoService: PagamentoService, private fb: FormBuilder, private router: Router,
+        public loadingService: LoadingService, private cdr: ChangeDetectorRef) {
         this.dataSource = new MatTableDataSource(this.pagamentos);
+
+   
 
     }
 
     ngOnInit(): void {
+/*
+        this.loadingService.loading$.subscribe((val) => {
+            this.isloading = val;
+            this.cdr.detectChanges();
+        });*/
         this.pagamento = this.fb.group({
             id: [{ value: '', disabled: true }],
             modoPagamento: [{ value: '', disabled: false, }],

@@ -73,6 +73,9 @@ import { ViewCaixaComponent } from './views/caixa/view-caixa/view-caixa.componen
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './_helper';
 import { LoginComponent } from './login';
 import { HomeComponent } from './views/home/home.component';
+import { LoadingInterceptor } from './components/loading/loading.interceptor';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -118,7 +121,8 @@ const maskConfig: Partial<IConfig> = {
         ViewCaixaComponent,
         HomeComponent,
         LoginComponent,
-        
+        LoadingComponent,
+
 
 
     ],
@@ -153,15 +157,33 @@ const maskConfig: Partial<IConfig> = {
         NgxMaskModule.forRoot(),
         ThermalPrintModule,
         appRoutingModule,
-        
+        MatProgressSpinnerModule
+
 
     ],
     exports: [
         PercentageMaskDirective
     ],
-    providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
-    { provide: MAT_DATE_LOCALE, useValue: "en-IN" },   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },fakeBackendProvider],
+    providers: [
+     
+        { provide: CURRENCY_MASK_CONFIG,
+            useValue: CustomCurrencyMaskConfig 
+        },
+        { provide: MAT_DATE_LOCALE,
+          useValue: "en-IN" 
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoadingInterceptor,
+            multi: true,
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,
+          multi: true },
+        { provide: HTTP_INTERCEPTORS, 
+          useClass: ErrorInterceptor, multi: true },
+          fakeBackendProvider,
+    ],
+
     bootstrap: [AppComponent]
 })
 
