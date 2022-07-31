@@ -12,28 +12,7 @@ import {CategoriaModel} from "../categoria.model";
 }*/
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: CategoriaModel[] = [
-  {id: 1, nome: 'Hydrogen'},
-  {id: 2, nome: 'Helium'},
-  {id: 3, nome: 'Lithium'},
-  {id: 4, nome: 'Beryllium'},
-  {id: 5, nome: 'Boron'},
-  {id: 6, nome: 'Carbon'},
-  {id: 7, nome: 'Nitrogen'},
-  {id: 8, nome: 'Oxygen'},
-  {id: 9, nome: 'Fluorine'},
-  {id: 10, nome: 'Neon'},
-  {id: 11, nome: 'Sodium'},
-  {id: 12, nome: 'Magnesium'},
-  {id: 13, nome: 'Aluminum'},
-  {id: 14, nome: 'Silicon'},
-  {id: 15, nome: 'Phosphorus'},
-  {id: 16, nome: 'Sulfur'},
-  {id: 17, nome: 'Chlorine'},
-  {id: 18, nome: 'Argon'},
-  {id: 19, nome: 'Potassium'},
-  {id: 20, nome: 'Calcium'},
-];
+
 
 /**
  * Data source for the CategoriaRead view. This class should
@@ -41,7 +20,7 @@ const EXAMPLE_DATA: CategoriaModel[] = [
  * (including sorting, pagination, and filtering).
  */
 export class CategoriaReadDataSource extends DataSource<CategoriaModel> {
-  data: CategoriaModel[] = EXAMPLE_DATA;
+  data: CategoriaModel[] ;
   paginator: MatPaginator;
   sort: MatSort;
 

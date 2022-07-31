@@ -1,10 +1,70 @@
 <mat-card>
-    <div style="display:flex ; align-items: flex-end; justify-content: flex-end">
-        <h1>ID VENDA : {{id}} </h1>
+    <div class="box">
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+        <div class="push">
+            <h1>ID VENDA : {{id}} </h1>
+        </div>
     </div>
-    <div style="display:flex ; align-items: flex-end; justify-content: flex-end">
-        <h1>TOTAL  {{total  | currency:'R$'}} </h1>
-    </div>
+
+
+    <table mat-table class="full-width-table" matSort aria-label="Elements">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (change)="optionClicked($event,row)" [checked]="row.selected"
+                    [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let produto">{{produto.id}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+            <td mat-cell *matCellDef="let produto">{{produto.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="preco">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Preco</th>
+            <td mat-cell *matCellDef="let produto">{{produto.preco | currency: 'BRL'}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+            <td mat-cell *matCellDef="let produto">{{produto.categoria.nome}}</td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[4,5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+    <!-- Symbol 
+
+        <tr
+            mat-row
+            (click)="clickedRows.add(row)"
+            [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
+
     <form class="example-form">
         <mat-form-field class="example-full-width" style="position: relative;bottom: 90px">
             <mat-label>Selecione o Produto</mat-label>
@@ -21,6 +81,7 @@
             </mat-autocomplete>
         </mat-form-field>
     </form>
+       Column -->
 </mat-card>
 <div style="padding-bottom: 20px"></div>
 <mat-card>
@@ -29,10 +90,10 @@
         <mat-list-item *ngIf="itensVenda?.length === 0"></mat-list-item>
         <mat-list-item *ngFor="let itemVenda of itensVenda">
             <mat-list-item> {{ itemVenda.produtoNome }}</mat-list-item>
-            <mat-list-item> {{itemVenda.produtoPreco  | currency:'R$'}}</mat-list-item>
+            <mat-list-item> {{itemVenda.produtoPreco | currency:'R$'}}</mat-list-item>
             <input style="width:50px; height:25px;" class='form-control' type='number' min="1" name="cpf"
-                   [(ngModel)]="itemVenda.quantidade" (change)="toggleSelectionItemVenda(itemVenda)">
-            <mat-list-item>{{itemVenda.subTotal  | currency:'R$'}}</mat-list-item>
+                [(ngModel)]="itemVenda.quantidade" (change)="toggleSelectionItemVenda(itemVenda)">
+            <mat-list-item>{{itemVenda.subTotal | currency:'R$'}}</mat-list-item>
             <button mat-raised-button (click)="deleteItemVenda(itemVenda)" color="primary">
                 X
             </button>
@@ -40,13 +101,21 @@
     </mat-list>
     <div style="padding-bottom: 50px"></div>
 
-    <div class="example-button-container"  style="display: flex; justify-content: flex-end">
-        <button mat-icon-button color="accent" (click)="salvarItensVenda()">
-            <mat-icon>save</mat-icon>
-        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button mat-icon-button color="warn" (click)="realizarPagamento()">
-            <mat-icon>payment</mat-icon>
-        </button>
+    <div class="box">
+        <h1>TOTAL {{total | currency:'R$'}} </h1>
+
+
+        <div class="push">
+            <button mat-icon-button color="accent" (click)="salvarItensVenda()" matTooltip="Salver Venda"
+                aria-label="Button that displays a tooltip when focused or hovered over">
+
+                <mat-icon>save</mat-icon>
+            </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-icon-button color="warn" (click)="realizarPagamento()" matTooltip="Ir para tela de pagamentos"
+                aria-label="Button that displays a tooltip when focused or hovered over">
+                <mat-icon>payment</mat-icon>
+            </button>
+        </div>
+
     </div>
 </mat-card>
-

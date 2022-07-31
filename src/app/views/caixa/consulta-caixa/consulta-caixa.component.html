@@ -1,3 +1,4 @@
+<mat-card>
 <div class="mat-elevation-z8">
     <table mat-table class="full-width-table" matSort aria-label="Elements">
         <!-- Id Column -->
@@ -22,21 +23,17 @@
         <ng-container matColumnDef="valorAbertura">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor Abertura</th>
             <td mat-cell *matCellDef="let caixa">
-                <input matInput
-                disabled="true" 
-                currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                value="{{caixa.valorAbertura}}"> </td>
+                <input matInput disabled="true" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                    value="{{caixa.valorAbertura}}">
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="valorFechamento">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor Fechamento</th>
             <td mat-cell *matCellDef="let caixa">
-                <input matInput
-                disabled="true" 
-                currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                value="{{caixa.valorFechamento}}"> </td>
+                <input matInput disabled="true" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                    value="{{caixa.valorFechamento}}">
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="dataAbertura">
@@ -55,8 +52,8 @@
 
             <td mat-cell *matCellDef="let caixa">
 
-                <button mat-icon-button  class="edit">
-                    <mat-icon (click)="viewCaixa(caixa.id)" >search</mat-icon>
+                <button mat-icon-button class="edit">
+                    <mat-icon (click)="viewCaixa(caixa.id)">search</mat-icon>
                 </button>
 
 
@@ -67,7 +64,8 @@
         <tr mat-row *matRowDef="let categoria; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="5"
-        [pageSizeOptions]="[5, 25, 50]">
+    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="25"
+        [pageSizeOptions]="[25, 50]">
     </mat-paginator>
 </div>
+</mat-card>

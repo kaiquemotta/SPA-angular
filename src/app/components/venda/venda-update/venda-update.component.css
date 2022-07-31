@@ -7,3 +7,30 @@
 .example-full-width {
     width: 100%;
 }
+
+.full-width-table {
+    width: 100%;
+  }
+  
+  .edit {
+    margin-right: 10px;
+  }
+  
+  .edit > i {
+    color: blue;
+  }
+  
+  .delete > i {
+    color: red;
+  }
+  
+
+  .box {
+    display: flex;
+
+  }
+  
+  .push {
+    margin-left: auto;
+}
+

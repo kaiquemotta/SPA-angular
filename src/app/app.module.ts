@@ -42,7 +42,7 @@ import { VendaComponent } from './views/venda/venda.component';
 import { VendaReadComponent } from './components/venda/venda-read/venda-read.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckbox, MatCheckboxModule } from "@angular/material/checkbox";
 import { DialogComponent } from './components/dialog/dialog/dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { VendaUpdateComponent } from "./components/venda/venda-update/venda-update.component";
@@ -76,6 +76,7 @@ import { HomeComponent } from './views/home/home.component';
 import { LoadingInterceptor } from './components/loading/loading.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -144,6 +145,7 @@ const maskConfig: Partial<IConfig> = {
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
+        MatCheckboxModule,
         ReactiveFormsModule,
         MatIconModule,
         MatAutocompleteModule,
@@ -157,8 +159,8 @@ const maskConfig: Partial<IConfig> = {
         NgxMaskModule.forRoot(),
         ThermalPrintModule,
         appRoutingModule,
-        MatProgressSpinnerModule
-
+        MatProgressSpinnerModule,
+        MatTooltipModule,
 
     ],
     exports: [

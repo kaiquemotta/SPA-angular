@@ -10,17 +10,18 @@
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
                 <mat-label>Valor Inical</mat-label>
-                <input matInput 
+                <input style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorAbertura"
                        formControlName="valorAbertura"
-                       type="text" min="0">
+                       type="text" min="0"
+                       >
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Valor Total Caixa</mat-label>
-                <input matInput currencyMask
+                <input style="color: cornflowerblue" matInput currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"placeholder="Ex: R$ 10.0" name="valorFechamento"
                        formControlName="valorFechamento"
                        type="text" min="0">
@@ -53,12 +54,13 @@
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
                 <mat-label>Valor Pagamento Dinheiro</mat-label>
-                <input matInput 
+                <input style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorPagamentoDinheiro"
                        formControlName="valorPagamentoDinheiro"
-                       type="text" min="0">
+                       type="text" min="0"
+                       >
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -75,14 +77,15 @@
                        formControlName="diferencaDinheiro"
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       type="text" >
+                       type="text" 
+                       [style.color]="colorDif">
             </mat-form-field>
         </div>
 
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total PIX</mat-label>
-                <input matInput 
+                <mat-label>Valor Pagamento PIX</mat-label>
+                <input style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorPagamentoPix"
@@ -104,7 +107,8 @@
                        formControlName="diferencaPix"
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       type="text" >
+                       type="text"
+                       [style.color]="caixaF.diferencaPix=== 0 ? 'green' : 'darkred'" >
             </mat-form-field>
         </div>
 
@@ -112,8 +116,8 @@
         
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total Cartão Credito</mat-label>
-                <input matInput 
+                <mat-label>Valor Pagamento Cartão Credito</mat-label>
+                <input style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorPagamentoCartaoCredito"                       
@@ -134,14 +138,15 @@
                        formControlName="diferencaCartaoCredito"
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       type="text" >
+                       type="text" 
+                       [style.color]="caixaF.diferencaCartaoCredito=== 0 ? 'green' : 'darkred'">
             </mat-form-field>
         </div>
 
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total Cartão Debito</mat-label>
-                <input matInput 
+                <mat-label>Valor Pagamento Cartão Debito</mat-label>
+                <input  style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorPagamentoCartaoDebito"                       
@@ -162,13 +167,14 @@
                        formControlName="diferencaCartaoDebito"
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                       type="text" >
+                       type="text"
+                       [style.color]="caixaF.diferencaCartaoDebito=== 0 ? 'green' : 'darkred'" >
             </mat-form-field>
         </div>
         <div style="display:flex ;flex-direction: row">
             <mat-form-field appearance="outline">
-                <mat-label>Valor Total Consignado</mat-label>
-                <input matInput 
+                <mat-label>Valor Pagamento Consignado</mat-label>
+                <input style="color: green" matInput 
                        currencyMask
                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                        placeholder="Ex: R$ 10.0" name="valorPagamentoConsignado"                       
