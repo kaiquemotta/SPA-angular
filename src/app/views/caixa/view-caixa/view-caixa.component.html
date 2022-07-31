@@ -1,175 +1,182 @@
-
 <div *ngIf="carregado == true">
-<h2 style="text-align:center">ID Caixa {{this.data.id}}</h2>
-<form style="text-align:center" [formGroup]="pagamento">
+    <h2 style="text-align:center">ID Caixa {{this.data.id}}</h2>
+    <form style="text-align:center" [formGroup]="pagamento">
 
-    <mat-card class="demo-dialog-card">
-        <mat-card-content>
+        <mat-card class="demo-dialog-card">
+            <mat-card-content>
 
-            <div style="display:flex ;flex-direction: row">
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Abertura</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorAbertura"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                  formControlName="valorAbertura">
-                </mat-form-field>
+                <div style="display:flex ;flex-direction: row">
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Abertura</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorAbertura" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorAbertura">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamento"   currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-              formControlName="valorFechamento">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamento" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamento">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Data Abertura</mat-label>
-                    <input matInput [(ngModel)]="caixa.dataAbertura"  
-                 formControlName="dataAbertura">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Data Abertura</mat-label>
+                        <input matInput [(ngModel)]="caixa.dataAbertura" formControlName="dataAbertura">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Data Fechamento</mat-label>
-                    <input matInput  matInput [(ngModel)]="caixa.dataFechamento"   formControlName="dataFechamento">
-                </mat-form-field>
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Status</mat-label>
-                    <input matInput  matInput [(ngModel)]="status" formControlName="status">
-                </mat-form-field>
-            </div>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Data Fechamento</mat-label>
+                        <input matInput matInput [(ngModel)]="caixa.dataFechamento" formControlName="dataFechamento">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Status</mat-label>
+                        <input matInput matInput [(ngModel)]="status" formControlName="status">
+                    </mat-form-field>
+                </div>
 
-            <div style="display:flex ;flex-direction: row">
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Recebido Dinheiro</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorPagamentoDinheiro"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagamentoDinheiro">
-                </mat-form-field>
+                <div style="display:flex ;flex-direction: row">
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Recebido Dinheiro</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorPagamentoDinheiro" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorPagamentoDinheiro">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Recebido PIX</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorPagamentoPix"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagamentoPix">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Recebido PIX</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorPagamentoPix" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorPagamentoPix">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Recebido Crédito</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorPagamentoCartaoCredito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="valorPagamentoCartaoCredito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Recebido Crédito</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorPagamentoCartaoCredito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorPagamentoCartaoCredito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Recebido Débito</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorPagamentoCartaoDebito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagamentoCartaoDebito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Recebido Débito</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorPagamentoCartaoDebito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorPagamentoCartaoDebito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Recebido Consignado</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorPagamentoConsignado"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="valorPagamentoConsignado">
-                </mat-form-field>
-            </div>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Recebido Consignado</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorPagamentoConsignado" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorPagamentoConsignado">
+                    </mat-form-field>
+                </div>
 
-            <div style="display:flex ;flex-direction: row">
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento Dinheiro</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamentoDinheiro"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorFechamentoDinheiro">
-                </mat-form-field>
+                <div style="display:flex ;flex-direction: row">
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento Dinheiro</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamentoDinheiro" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamentoDinheiro">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento PIX</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamentoPix"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorFechamentoPix">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento PIX</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamentoPix" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamentoPix">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento Crédito</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamentoCartaoCredito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="valorFechamentoCartaoCredito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento Crédito</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamentoCartaoCredito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamentoCartaoCredito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento Débito</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamentoCartaoDebito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorFechamentoCartaoDebito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento Débito</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamentoCartaoDebito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamentoCartaoDebito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Valor Fechamento Consignado</mat-label>
-                    <input matInput [(ngModel)]="caixa.valorFechamentoConsignado"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="valorFechamentoConsignado">
-                </mat-form-field>
-            </div>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Valor Fechamento Consignado</mat-label>
+                        <input matInput [(ngModel)]="caixa.valorFechamentoConsignado" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="valorFechamentoConsignado">
+                    </mat-form-field>
+                </div>
 
-            <div style="display:flex ;flex-direction: row">
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Diferença Dinheiro</mat-label>
-                    <input matInput [(ngModel)]="caixa.diferencaDinheiro"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="diferencaDinheiro">
-                </mat-form-field>
+                <div style="display:flex ;flex-direction: row">
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Diferença Dinheiro</mat-label>
+                        <input matInput [(ngModel)]="caixa.diferencaDinheiro" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="diferencaDinheiro">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Diferença PIX</mat-label>
-                    <input matInput [(ngModel)]="caixa.diferencaPix"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="diferencaPix">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Diferença PIX</mat-label>
+                        <input matInput [(ngModel)]="caixa.diferencaPix" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="diferencaPix">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Diferença Crédito</mat-label>
-                    <input matInput [(ngModel)]="caixa.diferencaCartaoCredito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="diferencaCartaoCredito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Diferença Crédito</mat-label>
+                        <input matInput [(ngModel)]="caixa.diferencaCartaoCredito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="diferencaCartaoCredito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Diferença Débito</mat-label>
-                    <input matInput [(ngModel)]="caixa.diferencaCartaoDebito"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="diferencaCartaoDebito">
-                </mat-form-field>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Diferença Débito</mat-label>
+                        <input matInput [(ngModel)]="caixa.diferencaCartaoDebito" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="diferencaCartaoDebito">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline" style="padding-left: 20px">
-                    <mat-label>Diferença Consignado</mat-label>
-                    <input matInput [(ngModel)]="caixa.diferencaConsignado"  currencyMask
-                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"formControlName="diferencaConsignado">
-                </mat-form-field>
-            </div>
+                    <mat-form-field appearance="outline" style="padding-left: 20px">
+                        <mat-label>Diferença Consignado</mat-label>
+                        <input matInput [(ngModel)]="caixa.diferencaConsignado" currencyMask
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                            formControlName="diferencaConsignado">
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
 
-            
-        </mat-card-content>
-    </mat-card>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 1150px">
+            <ng-container matColumnDef="idVenda">
+                <th mat-header-cell *matHeaderCellDef>ID Venda</th>
+                <td mat-cell *matCellDef="let pagamento"> {{pagamento.idVenda}} </td>
+            </ng-container>
+            <ng-container matColumnDef="modoPagamento">
+                <th mat-header-cell *matHeaderCellDef>Modo pagamento</th>
+                <td mat-cell *matCellDef="let pagamento"> {{pagamento.modoPagamentoDescricao}} </td>
+            </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="quantidadeParcela">
+                <th mat-header-cell *matHeaderCellDef> Qntd Parcela</th>
+                <td mat-cell *matCellDef="let pagamento"> {{pagamento.quantidadeParcela}} </td>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="valorPagamento">
+                <th mat-header-cell *matHeaderCellDef> Valor pgto</th>
+                <td mat-cell *matCellDef="let pagamento"> {{pagamento.valorPagamento |currency:'R$'}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 1150px">
-
-        <ng-container matColumnDef="idVenda">
-            <th mat-header-cell *matHeaderCellDef>ID Venda</th>
-            <td mat-cell *matCellDef="let pagamento"> {{pagamento.idVenda}} </td>
-        </ng-container>
-        <ng-container matColumnDef="modoPagamento">
-            <th mat-header-cell *matHeaderCellDef>Modo pagamento</th>
-            <td mat-cell *matCellDef="let pagamento"> {{pagamento.modoPagamentoDescricao}} </td>
-        </ng-container>
-        <!-- Weight Column -->
-        <ng-container matColumnDef="quantidadeParcela">
-            <th mat-header-cell *matHeaderCellDef> Qntd Parcela</th>
-            <td mat-cell *matCellDef="let pagamento"> {{pagamento.quantidadeParcela}} </td>
-        </ng-container>
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="valorPagamento">
-            <th mat-header-cell *matHeaderCellDef> Valor pgto</th>
-            <td mat-cell *matCellDef="let pagamento"> {{pagamento.valorPagamento |currency:'R$'}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    </table>
-    <div class="example-button-container" style="display: flex; justify-content: flex-end">
+        </table>
+        <!-- <div class="example-button-container" style="display: flex; justify-content: flex-end">
         <button mat-icon-button color="accent">
             <mat-icon>check_circle</mat-icon>
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button mat-icon-button color="accent">
             <mat-icon>close</mat-icon>
         </button>&nbsp;&nbsp;
-    </div>
+    </div> -->
 
-</form>
+    </form>
 </div>

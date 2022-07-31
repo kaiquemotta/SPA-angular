@@ -46,8 +46,8 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="padding-left: 20px">
                     <mat-label>Troco</mat-label>
-                    <input matInput placeholder="Width" name="troco" formControlName="troco" prefix="R$ "
-                        mask="separator.2" thousandSeparator="." value="{{troco| currency:'R$'}}">
+                    <input matInput placeholder="Width" name="troco" formControlName="troco"    currencyMask
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
                 </mat-form-field>
             </div>
             <div class="example-button-container" style="display: flex; justify-content: center">

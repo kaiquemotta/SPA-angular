@@ -172,6 +172,7 @@ const maskConfig: Partial<IConfig> = {
         { provide: MAT_DATE_LOCALE,
           useValue: "en-IN" 
         },
+      
         {
             provide: HTTP_INTERCEPTORS,
             useClass: LoadingInterceptor,

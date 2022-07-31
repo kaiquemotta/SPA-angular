@@ -28,7 +28,7 @@ export class AbreCaixaComponent implements OnInit {
   ngOnInit(): void {
 
     this.caixa = this.fb.group({
-      nome: ['', Validators.required],
+    //  nome: ['', Validators.required],
       valorAbertura: ['', Validators.required]
 
     })
